@@ -1,14 +1,19 @@
 using UnityEngine;
 using System.Collections;
+using System.Xml;
 
-public class PlayerController : MonoBehaviour {
-	private Actor actor;
-	void Awake () {
-		actor = gameObject.GetComponent<Actor>();
-	}
+public class PlayerController : Actor {
+	private const string PLAYER = "player";
+	
 	void Update () {
 		if (Input.GetMouseButtonDown(0)) {
-			actor.ActivateSkill(0);
+			ActivateSkill(0);
+		}
+	}
+	
+	protected override XmlNode datasource {
+		get {
+			return UserProperty.GetPropNode(PLAYER);
 		}
 	}
 }

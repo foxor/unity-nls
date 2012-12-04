@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <document>
-	<skill />	
+	<skill>
+		<id data="0" />
+		<name data="Arrow" />
+		<projectile />
+	</skill>	
 </document>

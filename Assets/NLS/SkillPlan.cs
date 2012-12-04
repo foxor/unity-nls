@@ -1,49 +1,52 @@
 using UnityEngine;
-using System.Collections;
+using System.Collections.Generic;
+using System.Xml;
+using System.Linq;
 
-public abstract class SkillPlan {
-	protected GameObject actor;
+public class SkillPlan {
 	
-	protected SkillSheet sheet;
+	private const string DIFFICULTY = "difficulty";
 	
-	public SkillPlan(GameObject actor, SkillSheet sheet) {
+	private Actor actor;
+	private XmlNode data;
+	private Skill main;
+	
+	public SkillPlan(Actor actor, XmlNode data) {
 		this.actor = actor;
-		this.sheet = sheet;
+		this.data = data;
+		main = data.FindSkills().First();
 	}
 	
-	protected abstract int difficulty {
-		get;
+	private int difficulty {
+		get {
+			return data.Child(DIFFICULTY).GetInt();
+		}
 	}
 	
-	protected abstract void apply();
-	
-	protected int skillId;
+	private void apply() {
+		if (main.Projectile) {
+			GameObject projectile = GameObject.Instantiate(Resources.Load(main.Name)) as GameObject;
+			projectile.transform.position += projectile.GetSkillMouseDelta();
+		}
+	}
 	
 	public void Use() {
-		float skill = sheet[skillId];
+		float skill = actor.sheet[main.Id];
 		float chanceSucceed = ((float)skill) / ((float)(skill + difficulty));
 		float useQuality = (chanceSucceed - Random.Range(0f, 1f)) * ((float)difficulty);
 		if (useQuality <= 0f) {
 			return;
 		}
 		
-		sheet.recordUse(skillId, useQuality * chanceSucceed / skill);
+		actor.sheet.recordUse(main.Id, useQuality * chanceSucceed / skill);
 		apply();
 	}
 }
 
-public class SkillPlanTest : SkillPlan {
+public static class SkillPlanUtils {
+	private const string SKILL_PLAN = "skillPlan";
 	
-	public SkillPlanTest(GameObject actor, SkillSheet sheet) : base(actor, sheet) {}
-	
-	protected override void apply ()
-	{
-		GameObject projectile = GameObject.Instantiate(Resources.Load("arrow")) as GameObject;
-		projectile.transform.position += projectile.GetSkillMouseDelta();
-	}
-	protected override int difficulty {
-		get {
-			return 1;
-		}
+	public static IEnumerable<SkillPlan> FindSkillPlans(this XmlNode xn, Actor actor) {
+		return xn.Children(SKILL_PLAN).Map<SkillPlan>(x => new SkillPlan(actor, x));
 	}
 }

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<document>
+	<player>
+		<skillPlan>
+			<skill skillId="0" />
+			<difficulty data="1" />
+		</skillPlan>
+		<skillSheet>
+			<level data="1">
+				<skill skillId="0" />
+			</level>
+		</skillSheet>
+	</player>	
+</document>
