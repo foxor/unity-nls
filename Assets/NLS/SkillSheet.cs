@@ -13,7 +13,8 @@ public class SkillSheet {
 		get {
 			return 1;
 		}
-		set {
-		}
+	}
+	
+	public void recordUse(int skillId, float xp) {
 	}
 }
