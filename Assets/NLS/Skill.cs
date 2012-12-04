@@ -8,6 +8,12 @@ public class Skill {
 	public Skill(XmlNode data) {
 		this.data = data;
 	}
+	
+	public string resourceName {
+		get {
+			return "arrow";
+		}
+	}
 }
 
 public static class SkillHelpers {

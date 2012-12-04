@@ -38,8 +38,8 @@ public class SkillPlanTest : SkillPlan {
 	
 	protected override void apply ()
 	{
-		GameObject newActor = GameObject.Instantiate(actor) as GameObject;
-		newActor.transform.position += newActor.GetSkillMouseDelta();
+		GameObject projectile = GameObject.Instantiate(Resources.Load("arrow")) as GameObject;
+		projectile.transform.position += projectile.GetSkillMouseDelta();
 	}
 	protected override int difficulty {
 		get {
