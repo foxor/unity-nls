@@ -38,7 +38,8 @@ public class SkillPlanTest : SkillPlan {
 	
 	protected override void apply ()
 	{
-		actor.AddComponent<SkillEffect>();
+		GameObject newActor = GameObject.Instantiate(actor) as GameObject;
+		newActor.transform.position += newActor.GetSkillMouseDelta();
 	}
 	protected override int difficulty {
 		get {

@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class Actor : MonoBehaviour {
+public class Actor : MonoBehaviour { 
 	
 	private SkillSheet sheet;
 	private SkillPlan[] plans;
@@ -11,10 +11,13 @@ public class Actor : MonoBehaviour {
 	}
 	
 	void Start () {
-		SkillPlanTest spt = new SkillPlanTest(gameObject, sheet);
-		spt.Use();
 	}
 	
 	void Update () {
+	}
+	
+	public void ActivateSkill(int index) {
+		SkillPlanTest spt = new SkillPlanTest(gameObject, sheet);
+		spt.Use();
 	}
 }
