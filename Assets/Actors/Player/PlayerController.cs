@@ -16,8 +16,8 @@ public class PlayerController : MonoBehaviour {
 public static class PlayerUtils {
 	public static Vector3 GetSkillMouseDelta(this GameObject player) {
 		Ray clickRay = Camera.main.ViewportPointToRay(Input.mousePosition);
-		float cameraToClicked = (transform.position.y - clickRay.origin.y) / clickRay.direction.y;
-		Vector3 delta = transform.position - (clickRay.origin + clickRay.direction * cameraToClicked);
+		float cameraToClicked = (player.transform.position.y - clickRay.origin.y) / clickRay.direction.y;
+		Vector3 delta = player.transform.position - (clickRay.origin + clickRay.direction * cameraToClicked);
 		delta.Normalize();
 		return delta;
 	}
