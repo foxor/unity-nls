@@ -3,10 +3,10 @@
 	<player>
 		<skillPlan>
 			<skill skillId="0" />
-			<difficulty data="1" />
+			<difficulty data="10" />
 		</skillPlan>
 		<skillSheet>
-			<level data="1">
+			<level data="10">
 				<skill skillId="0" />
 				<xp data="0" />
 			</level>

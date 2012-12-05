@@ -23,10 +23,9 @@ public class SkillPlan {
 		}
 	}
 	
-	private void apply() {
+	private void apply(float quality) {
 		if (main.Projectile) {
-			GameObject projectile = GameObject.Instantiate(Resources.Load(main.Name)) as GameObject;
-			projectile.transform.position += projectile.GetSkillMouseDelta();
+			GameObject projectile = Projectile.Launch(actor.transform, actor.gameObject.GetSkillMouseDelta() * quality, main.Name);
 		}
 	}
 	
@@ -39,7 +38,7 @@ public class SkillPlan {
 		}
 		
 		actor.sheet.recordUse(main.Id, useQuality * chanceSucceed / skill);
-		apply();
+		apply(useQuality);
 	}
 }
 
