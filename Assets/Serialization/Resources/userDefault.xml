@@ -8,7 +8,9 @@
 		<skillSheet>
 			<level data="1">
 				<skill skillId="0" />
+				<xp data="0" />
 			</level>
+			<save />
 		</skillSheet>
 	</player>	
 </document>

@@ -57,6 +57,14 @@ public class UserProperty : MonoBehaviour {
 		Save();
 	}
 	
+	public static void SetPropNode(XmlNode parent, XmlNode child) {
+		foreach (XmlNode toRemove in parent.Children(child.Name).ToArray()) {
+			parent.RemoveChild(toRemove);
+		}
+		parent.AppendChild(child);
+		Save();
+	}
+	
 	public static XmlNode AddProp(string propName) {
 		XmlNode xn = singleton.data.OwnerDocument.DocumentElement.CreateChild(propName);
 		Save();
